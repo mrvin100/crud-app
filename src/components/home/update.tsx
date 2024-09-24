@@ -6,17 +6,14 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useToast } from "@/hooks/use-toast";
 import axios from "axios";
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 const FormSchema = z.object({
   title: z.string().min(2, {
@@ -28,47 +25,29 @@ const FormSchema = z.object({
 });
 
 export type PostType = {
+  id?: string;
   title: string;
   content: string;
 };
 
-export default function UpdatePost() {
-  const { toast } = useToast();
-  const { id } = useParams();
-
-  const [selectedPost, setSelectedPost] = useState<PostType>({});
-  useEffect(() => {
-    fetchPost();
-  }, [id]);
-  
-  const fetchPost = async () => {
-    try {
-      const res = await axios.get(`http://localhost:3000/posts/${id}`);
-      setSelectedPost(res.data);
-    } catch (error) {
-      console.log("Error fetching post to update:", error);
-    }
-  };
-
-  console.log("selected post : ", selectedPost);
-
+export default function UpdatePost({
+  id,
+  post,
+}: {
+  id: string;
+  post: PostType;
+}) {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      title: selectedPost?.title || "",
-      content: selectedPost?.content || "",
+      title: post?.title || "",
+      content: post?.content || "",
     },
   });
+  console.log("selected post : ", post);
+  console.log("selected post : ", post.title);
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
-    toast({
-      title: "You submitted the following values:",
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
-    });
     handleUpdatePost(id, data);
   }
 
@@ -81,35 +60,48 @@ export default function UpdatePost() {
         title: newPost.title,
         content: newPost.content,
       });
-      console.log("Post updated succesfully : ", res.data);
+      toast("Post updated succesfully", {
+        description: "Go to home to see your updated post.",
+        action: {
+          label: "Hide",
+          onClick: () => {
+            console.log("Post updated succesfully : ", res.data);
+          },
+        },
+      });
     } catch (error) {
-      console.log("Error when updating post :", error);
+      toast("Error when creating post", {
+        description: "Open console to see what's happen.",
+        action: {
+          label: "View",
+          onClick: () => {
+            console.log("Error when updating post :", error);
+          },
+        },
+      });
     }
   };
 
   return (
-    <section className="border container mx-auto h-[80vh] flex justify-center items-center">
+    <section className="container mx-auto flex justify-center items-center">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="border max-w-sm w-full p-4 shadow-sm rounded-sm"
+          className="max-w-sm w-full"
         >
           <FormField
             control={form.control}
             name="title"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel>Title</FormLabel>
+              <FormItem className="my-4">
+                <FormLabel className="text-lg">Title</FormLabel>
                 <FormControl>
                   <Input
                     placeholder="update post title"
                     {...field}
-                    defaultValue={selectedPost.title}
+                    defaultValue={post.title}
                   />
                 </FormControl>
-                <FormDescription>
-                  This is your public display title.
-                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -118,18 +110,15 @@ export default function UpdatePost() {
             control={form.control}
             name="content"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel>Content</FormLabel>
+              <FormItem className="my-4">
+                <FormLabel className="text-lg">Content</FormLabel>
                 <FormControl>
                   <Input
                     placeholder="update post content"
                     {...field}
-                    defaultValue={selectedPost.content}
+                    defaultValue={post.content}
                   />
                 </FormControl>
-                <FormDescription>
-                  This is your public display content.
-                </FormDescription>
                 <FormMessage />
               </FormItem>
             )}

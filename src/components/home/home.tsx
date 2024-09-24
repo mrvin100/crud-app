@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { PostType } from "./create";
-import { Alert, AlertDescription, AlertTitle } from "./ui/alert";
+import { PostType } from "@/components/home/create";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Info } from "lucide-react";
-import Post from "./post";
+import Post from "@/components/home/post";
 import axios from "axios";
 
 const Home = () => {
@@ -18,18 +18,18 @@ const Home = () => {
   };
   useEffect(() => {
     fetchPosts();
-  }, [posts]);
+  }, []);
   return (
     <section className="border container mx-auto min-h-[80vh] p-4">
-      <h2 className="my-4 mb-10 text-center text-gray-500">
-        Hello welcome to my Blog Post
+      <h2 className="text-3xl my-4 mb-10 text-center">
+        Hello, welcome to Bloggy!
       </h2>
 
       <div className="">
         {posts && posts.length > 0 ? (
-          <div className="p-4 grid gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
+          <div className="p-4 grid gap-4 md:gap-6 sm:grid-cols-2 md:grid-cols-3">
             {posts.map((post, index) => (
-              <Post key={index} {...post} setPosts={setPosts} posts={posts} />
+              <Post key={index} post={post} setPosts={setPosts} posts={posts} />
             ))}
           </div>
         ) : (
