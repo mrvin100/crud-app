@@ -15,7 +15,6 @@ import CreatePost from "@/components/home/create";
 export default function Header() {
   const navLinks = [
     { label: "About", to: "/about" },
-    // { label: "New post", to: "/create" },
   ];
   return (
     <header className="">

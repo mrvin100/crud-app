@@ -15,6 +15,8 @@ import { Input } from "@/components/ui/input";
 import axios from "axios";
 import { toast } from "sonner";
 import { Textarea } from "@/components/ui/textarea";
+import { useContext } from "react";
+import { GlobalContext } from "@/context/GlobalState";
 
 const FormSchema = z.object({
   title: z.string().min(2, {
@@ -32,6 +34,12 @@ export type PostType = {
 };
 
 export default function CreatePost() {
+  const context = useContext(GlobalContext);
+  if (!context) {
+    throw new Error("GlobalContext is not defined");
+  }
+  const { setPosts } = context;
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -42,24 +50,21 @@ export default function CreatePost() {
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     handleSubmit(data);
-    // window.location.href = "/";
   }
 
   const handleSubmit = async (newPost: PostType) => {
     try {
-      const res = await axios.post("http://localhost:3000/posts", {
-        title: newPost.title,
-        content: newPost.content,
-      });
+      const res = await axios.post("http://localhost:3000/posts", newPost);
       toast("Post created succesfully", {
         description: "Go to home to see your new post.",
         action: {
           label: "Hide",
           onClick: () => {
-            console.log("Post created succesfully : ", res.data)
+            console.log("Post created succesfully : ", res.data);
           },
         },
       });
+      setPosts((prevPosts) => [...prevPosts, {...newPost, id: res.data.id}])
     } catch (error) {
       toast("Error when creating post", {
         description: "Open console to see what's happen.",

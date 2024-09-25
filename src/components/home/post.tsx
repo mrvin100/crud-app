@@ -107,7 +107,7 @@ export default function Post({post, posts, setPosts}: Props) {
                 Update your post here. Click submit when you're done.
               </DialogDescription>
             </DialogHeader>
-            <UpdatePost id={post.id!} post={post} />
+            <UpdatePost id={post.id!} post={post} setPosts={setPosts} />
           </DialogContent>
         </Dialog>
         <AlertDialog>

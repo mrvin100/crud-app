@@ -14,6 +14,7 @@ import {
 import { Input } from "@/components/ui/input";
 import axios from "axios";
 import { toast } from "sonner";
+import { PostType } from "./create";
 
 const FormSchema = z.object({
   title: z.string().min(2, {
@@ -24,18 +25,14 @@ const FormSchema = z.object({
   }),
 });
 
-export type PostType = {
-  id?: string;
-  title: string;
-  content: string;
-};
-
 export default function UpdatePost({
   id,
   post,
+  setPosts,
 }: {
   id: string;
   post: PostType;
+  setPosts: React.Dispatch<React.SetStateAction<PostType[]>>;
 }) {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -44,8 +41,6 @@ export default function UpdatePost({
       content: post?.content || "",
     },
   });
-  console.log("selected post : ", post);
-  console.log("selected post : ", post.title);
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     handleUpdatePost(id, data);
@@ -60,6 +55,11 @@ export default function UpdatePost({
         title: newPost.title,
         content: newPost.content,
       });
+      setPosts((prevPosts) =>
+        prevPosts.map((post) =>
+          post.id === postId ? { ...post, ...newPost } : post
+        )
+      );
       toast("Post updated succesfully", {
         description: "Go to home to see your updated post.",
         action: {
