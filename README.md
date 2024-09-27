@@ -1,5 +1,11 @@
 # React + TypeScript + Vite
 
+# launch json server with commande :
+```
+cd src/db/
+json-server db.json --whatch 
+```
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:

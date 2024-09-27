@@ -29,10 +29,12 @@ export default function UpdatePost({
   id,
   post,
   setPosts,
+  setIsUpdateDialogOpen,
 }: {
   id: string;
   post: PostType;
   setPosts: React.Dispatch<React.SetStateAction<PostType[]>>;
+  setIsUpdateDialogOpen: React.Dispatch<React.SetStateAction<boolean>>
 }) {
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -47,7 +49,6 @@ export default function UpdatePost({
   }
 
   const handleUpdatePost = async (postId: string, newPost: PostType) => {
-    console.log("new post :", newPost);
 
     try {
       const res = await axios.put(`http://localhost:3000/posts/${postId}`, {
@@ -69,6 +70,7 @@ export default function UpdatePost({
           },
         },
       });
+      setIsUpdateDialogOpen(false)
     } catch (error) {
       toast("Error when creating post", {
         description: "Open console to see what's happen.",

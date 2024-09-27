@@ -48,13 +48,9 @@ export default function CreatePost() {
     },
   });
 
-  function onSubmit(data: z.infer<typeof FormSchema>) {
-    handleSubmit(data);
-  }
-
-  const handleSubmit = async (newPost: PostType) => {
+  async function onSubmit(datas: z.infer<typeof FormSchema>) {
     try {
-      const res = await axios.post("http://localhost:3000/posts", newPost);
+      const res = await axios.post("http://localhost:3000/posts", datas);
       toast("Post created succesfully", {
         description: "Go to home to see your new post.",
         action: {
@@ -64,7 +60,8 @@ export default function CreatePost() {
           },
         },
       });
-      setPosts((prevPosts) => [...prevPosts, {...newPost, id: res.data.id}])
+      setPosts((prevPosts) => [...prevPosts, {...datas, id: res.data.id}])
+      form.reset()
     } catch (error) {
       toast("Error when creating post", {
         description: "Open console to see what's happen.",
@@ -76,7 +73,7 @@ export default function CreatePost() {
         },
       });
     }
-  };
+  }
 
   return (
     <section className="container mx-auto flex justify-center items-center">

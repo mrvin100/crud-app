@@ -32,6 +32,7 @@ import {
 import UpdatePost from "@/components/home/update";
 
 import { toast } from "sonner";
+import * as React from 'react'
 
 interface Props {
   post: PostType,
@@ -40,6 +41,7 @@ interface Props {
 }
 
 export default function Post({post, posts, setPosts}: Props) {
+  const [isUpdateDialogOpen, setIsUpdateDialogOpen] = React.useState(false);
   const deletePost = async (postId: string) => {
     try {
       const res = await axios.delete(`http://localhost:3000/posts/${postId}`);
@@ -94,7 +96,7 @@ export default function Post({post, posts, setPosts}: Props) {
         </span>
       </CardContent>
       <CardFooter className="flex justify-between gap-4">
-        <Dialog>
+        <Dialog open={isUpdateDialogOpen} onOpenChange={setIsUpdateDialogOpen}>
           <DialogTrigger asChild>
           <Button variant={"secondary"} size={"icon"}>
             <Pencil className="h-4 w-4" />
@@ -107,7 +109,7 @@ export default function Post({post, posts, setPosts}: Props) {
                 Update your post here. Click submit when you're done.
               </DialogDescription>
             </DialogHeader>
-            <UpdatePost id={post.id!} post={post} setPosts={setPosts} />
+            <UpdatePost id={post.id!} post={post} setPosts={setPosts} setIsUpdateDialogOpen={setIsUpdateDialogOpen} />
           </DialogContent>
         </Dialog>
         <AlertDialog>
