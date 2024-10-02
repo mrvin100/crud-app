@@ -5,7 +5,7 @@ import axios from "axios";
 import { toast } from "sonner";
 import { GlobalContext } from "@/context/GlobalState";
 import * as React from "react";
-import { PostType } from "./create";
+import { PostType } from "@/services/create";
 
 const Home = () => {
   const context = React.useContext(GlobalContext);

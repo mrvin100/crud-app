@@ -1,9 +1,9 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Header from "@/components/global/header";
-import Home from "@/components/home/home";
-import About from "@/components/about/about";
+import Header from "@/layout/header";
+import Home from "@/pages/home/home";
+import About from "@/pages/about/about";
 import { Toaster } from "@/components/ui/sonner";
-import Footer from "./components/global/footer";
+import Footer from "./layout/footer";
 function App() {
   return (
     <>

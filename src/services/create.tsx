@@ -27,12 +27,6 @@ const FormSchema = z.object({
   }),
 });
 
-export type PostType = {
-  id?: string;
-  title: string;
-  content: string;
-};
-
 export default function CreatePost() {
   const context = useContext(GlobalContext);
   if (!context) {

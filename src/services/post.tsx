@@ -17,7 +17,6 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { PostType } from "@/services/create";
 import { Button } from "@/components/ui/button";
 import { Pencil, Trash } from "lucide-react";
 import axios from "axios";
@@ -33,6 +32,7 @@ import UpdatePost from "@/services/update";
 
 import { toast } from "sonner";
 import * as React from 'react'
+import { PostType } from "@/helpers/post.model";
 
 interface Props {
   post: PostType,

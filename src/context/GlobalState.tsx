@@ -1,4 +1,4 @@
-import { PostType } from "@/components/home/create";
+import { PostType } from "@/services/create";
 import * as React from "react";
 
 interface GlobalContextType {
