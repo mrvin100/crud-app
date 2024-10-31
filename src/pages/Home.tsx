@@ -1,11 +1,11 @@
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Info } from "lucide-react";
-import Post from "@/components/home/post";
+import Post from "@/components/home/Post";
 import axios from "axios";
 import { toast } from "sonner";
 import { GlobalContext } from "@/context/GlobalState";
 import * as React from "react";
-import { PostType } from "@/services/create";
+import { PostType } from "@/helpers/post.model";
 
 const Home = () => {
   const context = React.useContext(GlobalContext);
