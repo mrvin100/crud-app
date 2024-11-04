@@ -12,9 +12,9 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import axios from "axios";
 import { toast } from "sonner";
 import { PostType } from "@/features/posts/Post.Model";
+import { updatePost } from "./postAPI";
 
 const FormSchema = z.object({
   title: z.string().min(2, {
@@ -51,11 +51,7 @@ export default function UpdatePost({
   const handleUpdatePost = async (postId: string, newPost: PostType) => {
 
     try {
-      const res = await axios.put(`http://localhost:3000/posts/${postId}`, {
-        id: id,
-        title: newPost.title,
-        content: newPost.content,
-      });
+      const res = await updatePost(postId, newPost)
       setPosts((prevPosts) =>
         prevPosts.map((post) =>
           post.id === postId ? { ...post, ...newPost } : post

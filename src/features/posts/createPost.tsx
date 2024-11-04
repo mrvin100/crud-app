@@ -12,11 +12,11 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import axios from "axios";
 import { toast } from "sonner";
 import { Textarea } from "@/components/ui/textarea";
 import { useContext } from "react";
 import { GlobalContext } from "@/context/GlobalState";
+import { createPost } from "./postAPI";
 
 const FormSchema = z.object({
   title: z.string().min(2, {
@@ -44,7 +44,7 @@ export default function CreatePost() {
 
   async function onSubmit(datas: z.infer<typeof FormSchema>) {
     try {
-      const res = await axios.post("http://localhost:3000/posts", datas);
+      const res = await createPost(datas)
       toast("Post created succesfully", {
         description: "Go to home to see your new post.",
         action: {

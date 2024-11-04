@@ -20,7 +20,6 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { Pencil, Trash } from "lucide-react";
-import axios from "axios";
 import {
   Dialog,
   DialogContent,
@@ -33,39 +32,30 @@ import UpdatePost from "@/features/posts/updatePost";
 
 import { toast } from "sonner";
 import { PostType } from "@/features/posts/Post.Model";
+import { deletePost } from "@/features/posts/postAPI";
 
 interface Props {
-  post: PostType,
-  setPosts?: React.Dispatch<React.SetStateAction<PostType[]>>, 
-  posts?: PostType[]
+  post: PostType;
+  setPosts?: React.Dispatch<React.SetStateAction<PostType[]>>;
+  posts?: PostType[];
 }
 
-export default function Post({post, posts, setPosts}: Props) {
+export default function Post({ post, posts, setPosts }: Props) {
   const [isUpdateDialogOpen, setIsUpdateDialogOpen] = React.useState(false);
-  const deletePost = async (postId: string) => {
+  const handleDelete = async (postId: string) => {
     try {
-      const res = await axios.delete(`http://localhost:3000/posts/${postId}`);
-
-      if (res.status === 200) {
-        toast("Post deleted succesfully!", {
-          description: "Remember to add new post after.",
-          action: {
-            label: "Hide",
-            onClick: () => {
-              console.log("Post deleted succesfully:", res.data);
-            },
+      await deletePost(postId);
+      toast("Post deleted succesfully!", {
+        description: "Remember to add new post after.",
+        action: {
+          label: "Hide",
+          onClick: () => {
+            console.log("Post deleted succesfully:", postId);
           },
-        });
-      } else {
-        toast("Error deleting post!", {
-          description: "view more details in console.",
-          action: {
-            label: "view",
-            onClick: () => {
-              console.log("Error deleting post:", res.data);
-            },
-          },
-        });
+        },
+      });
+      if (setPosts && posts) {
+        setPosts(posts.filter((post) => post.id !== postId));
       }
     } catch (error) {
       toast("Error deleting post!", {
@@ -79,10 +69,6 @@ export default function Post({post, posts, setPosts}: Props) {
       });
     }
   };
-  function handleDelete(id: string) {
-    deletePost(id);
-    setPosts(posts.filter((post) => post.id !== id));
-  }
 
   return (
     <Card>
@@ -98,9 +84,9 @@ export default function Post({post, posts, setPosts}: Props) {
       <CardFooter className="flex justify-between gap-4">
         <Dialog open={isUpdateDialogOpen} onOpenChange={setIsUpdateDialogOpen}>
           <DialogTrigger asChild>
-          <Button variant={"secondary"} size={"icon"}>
-            <Pencil className="h-4 w-4" />
-          </Button>
+            <Button variant={"secondary"} size={"icon"}>
+              <Pencil className="h-4 w-4" />
+            </Button>
           </DialogTrigger>
           <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>
@@ -109,7 +95,12 @@ export default function Post({post, posts, setPosts}: Props) {
                 Update your post here. Click submit when you're done.
               </DialogDescription>
             </DialogHeader>
-            <UpdatePost id={post.id!} post={post} setPosts={setPosts} setIsUpdateDialogOpen={setIsUpdateDialogOpen} />
+            <UpdatePost
+              id={post.id!}
+              post={post}
+              setPosts={setPosts}
+              setIsUpdateDialogOpen={setIsUpdateDialogOpen}
+            />
           </DialogContent>
         </Dialog>
         <AlertDialog>

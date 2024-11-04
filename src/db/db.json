@@ -16,14 +16,19 @@
       "content": "Post content"
     },
     {
-      "id": "803c",
-      "title": "Post 4",
-      "content": "Post content"
+      "title": "Post updated",
+      "content": "Post content updated",
+      "id": "803c"
     },
     {
       "id": "22e0",
       "title": "Post 5",
       "content": "Post content"
+    },
+    {
+      "id": "2a0f",
+      "title": "Hello world",
+      "content": "new addon"
     }
   ]
 }

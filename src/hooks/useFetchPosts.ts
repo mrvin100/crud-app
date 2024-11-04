@@ -1,5 +1,5 @@
 import { GlobalContext } from '@/context/GlobalState';
-import axios from 'axios';
+import { fetchPosts } from '@/features/posts/postAPI';
 import * as React from 'react'
 import { toast } from 'sonner';
 
@@ -9,12 +9,12 @@ const useFetchPosts = () => {
       throw new Error("GlobalContext is not defined");
     }
     const { setPosts } = context;
-    const [loading, setLoading] = React.useState(true);
+    const [loading, setLoading] = React.useState(false);
   
-    const fetchPosts = React.useCallback(async () => {
+    const loadPosts = React.useCallback(async () => {
+      setLoading(true)
       try {
-        const res = await axios.get("http://localhost:3000/posts");
-        const data = await res.data;
+        const data = await fetchPosts();
         if (data && data.length) {
           setPosts(data);
         }
@@ -25,8 +25,8 @@ const useFetchPosts = () => {
       }
     }, [setPosts]);
     React.useEffect(() => {
-      fetchPosts();
-    }, [fetchPosts]);
+      loadPosts();
+    }, [loadPosts]);
     return { loading }
 }
 
