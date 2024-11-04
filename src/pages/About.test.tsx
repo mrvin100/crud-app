@@ -4,10 +4,9 @@ import { render, screen } from '@testing-library/react'
 import About from './About'
 
 describe('About', () => {
-    it('should render the default message', () => {
-        render(<About />);
-        const heading = screen.getByRole('heading')
+    it('should render About section', () => {
+        render(<About />)
+        const heading = screen.getByRole('heading', { name: /about section/i })
         expect(heading).toBeInTheDocument()
-        expect(heading).toHaveTextContent(/about/i)
     })
 })
