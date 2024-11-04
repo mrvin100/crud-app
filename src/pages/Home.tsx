@@ -1,37 +1,15 @@
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Info } from "lucide-react";
 import Post from "@/components/post/Post";
-import axios from "axios";
-import { toast } from "sonner";
 import { GlobalContext } from "@/context/GlobalState";
 import * as React from "react";
 import { PostType } from "@/features/posts/Post.Model";
+import useFetchPosts from "@/hooks/useFetchPosts";
 
 const Home = () => {
-  const context = React.useContext(GlobalContext);
-  if (!context) {
-    throw new Error("GlobalContext is not defined");
-  }
-  const { posts, setPosts } = context;
-  const [loading, setLoading] = React.useState(true);
-  console.log("posts : ", posts);
-
-  const fetchPosts = React.useCallback(async () => {
-    try {
-      const res = await axios.get("http://localhost:3000/posts");
-      const data = await res.data;
-      if (data && data.length) {
-        setPosts(data);
-      }
-    } catch (error) {
-      toast.error(`Error fetching posts. Please try again later: ${error}`);
-    } finally {
-      setLoading(false);
-    }
-  }, [setPosts]);
-  React.useEffect(() => {
-    fetchPosts();
-  }, [fetchPosts]);
+  const context = React.useContext(GlobalContext)
+  const posts = context?.posts
+  const { loading } = useFetchPosts()
   return (
     <section className="border container mx-auto min-h-[80vh] p-4">
       <h2 className="text-3xl my-4 mb-10 text-center">
@@ -49,7 +27,7 @@ const Home = () => {
               <Post
                 key={post.id}
                 post={post}
-                setPosts={setPosts}
+                setPosts={context?.setPosts}
                 posts={posts}
               />
             ))}
