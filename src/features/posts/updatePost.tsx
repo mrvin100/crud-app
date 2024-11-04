@@ -14,7 +14,7 @@ import {
 import { Input } from "@/components/ui/input";
 import axios from "axios";
 import { toast } from "sonner";
-import { PostType } from "@/helpers/post.model";
+import { PostType } from "@/features/posts/Post.Model";
 
 const FormSchema = z.object({
   title: z.string().min(2, {

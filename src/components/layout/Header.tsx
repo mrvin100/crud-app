@@ -9,7 +9,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import CreatePost from "@/services/create";
+import CreatePost from "@/features/posts/createPost";
 
 
 export default function Header() {

@@ -1,0 +1,1 @@
+// Nouveau fichier pour gérer les appels API liés aux posts

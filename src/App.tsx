@@ -1,9 +1,9 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Header from "@/layout/Header";
+import Header from "@/components/layout/Header";
 import Home from "@/pages/Home";
 import About from "@/pages/About";
 import { Toaster } from "@/components/ui/sonner";
-import Footer from "@/layout/Footer";
+import Footer from "@/components/layout/Footer";
 function App() {
   return (
     <>

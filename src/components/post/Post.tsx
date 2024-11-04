@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Card,
   CardContent,
@@ -28,16 +29,15 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import UpdatePost from "@/services/update";
+import UpdatePost from "@/features/posts/updatePost";
 
 import { toast } from "sonner";
-import * as React from 'react'
-import { PostType } from "@/helpers/post.model";
+import { PostType } from "@/features/posts/Post.Model";
 
 interface Props {
   post: PostType,
-  setPosts: React.Dispatch<React.SetStateAction<PostType[]>>, 
-  posts: PostType[]
+  setPosts?: React.Dispatch<React.SetStateAction<PostType[]>>, 
+  posts?: PostType[]
 }
 
 export default function Post({post, posts, setPosts}: Props) {
