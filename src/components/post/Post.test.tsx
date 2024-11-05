@@ -1,7 +1,7 @@
 import React from 'react'
 import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
-import Post from "./Post"
+import Post from "./index"
 import { PostType } from "@/features/posts/Post.Model"
 
 describe('Post', () => {

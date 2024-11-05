@@ -1,6 +1,6 @@
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Info } from "lucide-react";
-import Post from "@/components/post/Post";
+import Post from "@/components/post";
 import { GlobalContext } from "@/context/GlobalState";
 import * as React from "react";
 import { PostType } from "@/features/posts/Post.Model";

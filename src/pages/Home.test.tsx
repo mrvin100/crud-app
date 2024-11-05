@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import { PostType } from "@/features/posts/Post.Model";
-import { GlobalContext } from '@/context/GlobalState';
+import { GlobalContext } from "@/context/GlobalState";
 import Home from './Home';
 
 const mockPosts: PostType[] = [
