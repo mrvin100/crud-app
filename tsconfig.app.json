@@ -29,7 +29,9 @@
       "@/ui/*": ["src/components/ui/*"],
       "@/lib/*": ["src/lib/*"],
       "@/hooks/*": ["src/hooks/*"],
-      "@/context/*": ["src/context/*"]
+      "@/context/*": ["src/context/*"],
+      "@/pages/*": ["src/pages/*"],
+      "@/features/*": ["src/features/*"]
     }
   },
   "include": ["src/**/*"]
