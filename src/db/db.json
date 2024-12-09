@@ -6,9 +6,9 @@
       "content": "Post Content"
     },
     {
-      "id": "d0a5",
-      "title": "Post 2",
-      "content": "Post content"
+      "title": "Post 3",
+      "content": "Post content",
+      "id": "d0a5"
     },
     {
       "id": "a97b",
@@ -29,6 +29,11 @@
       "id": "2a0f",
       "title": "Hello world",
       "content": "new addon"
+    },
+    {
+      "id": "a54b",
+      "title": "Hello world",
+      "content": "New addons"
     }
   ]
 }
