@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom' // Extends expect with custom matchers like toBeInTheDocument
+import '@testing-library/jest-dom'
 import About from './About'
 
 describe('About', () => {
