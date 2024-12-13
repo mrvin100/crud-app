@@ -22,11 +22,15 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
     /* resolve path of my editor */
-    "baseUrl": ".",
+    "baseUrl": "./",
     "paths": {
       "@/*": [
         "./src/*"
-      ]
+      ],
+      "@components/*":["src/components/*"],
+      "@context/*":["src/context/*"],
+      "@hooks/*":["src/hooks/*"],
+      "@pages/*":["src/pages/*"],
     },
     "esModuleInterop": true,
     "types": ["vite/client", "vitest/globals"]
