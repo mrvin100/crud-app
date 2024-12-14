@@ -29,7 +29,7 @@ describe('Home', () => {
             <Home />
         </GlobalContext.Provider>
         )
-       waitFor(()=>{
+        waitFor(()=>{
             expect(screen.getByText(/Hello, welcome to Bloggy!/i)).toBeInTheDocument()
             expect(screen.getByText(/Post 1/i)).toBeInTheDocument()
             expect(screen.getByText(/ Content of Post 1/i)).toBeInTheDocument()
