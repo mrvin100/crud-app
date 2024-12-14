@@ -33,6 +33,8 @@ describe('Home', () => {
             expect(screen.getByText(/Hello, welcome to Bloggy!/i)).toBeInTheDocument()
             expect(screen.getByText(/Post 1/i)).toBeInTheDocument()
             expect(screen.getByText(/ Content of Post 1/i)).toBeInTheDocument()
+            expect(screen.getByText(/Post 2/i)).toBeInTheDocument()
+            expect(screen.getByText(/ Content of Post 2/i)).toBeInTheDocument()
         })
        
     })
