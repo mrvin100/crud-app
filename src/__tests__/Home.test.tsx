@@ -23,15 +23,18 @@ describe('Home', () => {
         expect(screen.getByText(/loading posts/i)).toBeInTheDocument()
         screen.debug()
     })
-    test("render posts when available", () => {
+    test("render posts when available", async () => {
         render( 
         <GlobalContext.Provider value={mockContextValue}>
             <Home />
         </GlobalContext.Provider>
         )
-        expect(screen.getByText(/Hello, welcome to Bloggy!/i)).toBeInTheDocument()
-        expect(screen.queryByText(/Post 1/i)).toBeNull()
-        expect(screen.queryByText(/Post 2/i)).toBeNull()
+       waitFor(()=>{
+            expect(screen.getByText(/Hello, welcome to Bloggy!/i)).toBeInTheDocument()
+            expect(screen.getByText(/Post 1/i)).toBeInTheDocument()
+            expect(screen.getByText(/ Content of Post 1/i)).toBeInTheDocument()
+        })
+       
     })
     test("render alert when no posts are available", async () => {
         render(
