@@ -8,4 +8,4 @@ describe('About', () => {
         const heading = screen.getByRole('heading', { name: /about section/i })
         expect(heading).toBeInTheDocument()
     })
-})
+})  

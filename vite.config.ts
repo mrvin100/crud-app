@@ -5,6 +5,11 @@ import path from 'path'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  test : {
+    globals  : true,
+    environment : 'jsdom',
+    setupFiles : ['./src/__tests__/setup/setup.ts'],
+  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src/"),
@@ -15,3 +20,5 @@ export default defineConfig({
     },
   },
 })
+
+
