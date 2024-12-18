@@ -13,9 +13,11 @@ import CreatePost from "@/features/posts/createPost";
 
 
 export default function Header() {
+
   const navLinks = [
     { label: "About", to: "/about" },
-  ];
+  ]
+
   return (
     <header className="">
       <div className="container border shadow-sm flex justify-between mx-auto p-4 my-4">
@@ -29,8 +31,9 @@ export default function Header() {
               <Button variant={"secondary"} className="ml-4">
                 <Link to={`${navLink.to}`}>{navLink.label}</Link>
               </Button>
-            ))}
-          <AddPost />
+            ))
+          }
+          <AddPost/>
         </nav>
       </div>
     </header>

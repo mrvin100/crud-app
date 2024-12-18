@@ -68,7 +68,7 @@ export default function UpdatePost({
       });
       setIsUpdateDialogOpen(false)
     } catch (error) {
-      toast("Error when creating post", {
+      toast("Error when updating post", {
         description: "Open console to see what's happen.",
         action: {
           label: "View",

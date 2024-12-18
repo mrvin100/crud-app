@@ -54,7 +54,7 @@ export default function CreatePost() {
           },
         },
       });
-      setPosts((prevPosts) => [...prevPosts, {...datas, id: res.data.id}])
+      setPosts((prevPosts) => [...prevPosts, {...datas, id: res.data?.id}])
       form.reset()
     } catch (error) {
       toast("Error when creating post", {

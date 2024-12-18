@@ -1,4 +1,9 @@
 import React from "react";
+import UpdatePost from "@/features/posts/updatePost";
+import { toast } from "sonner";
+import { PostType } from "@/features/posts/Post.Model";
+import { deletePost } from "@/features/posts/postAPI";
+
 import {
   Card,
   CardContent,
@@ -28,15 +33,10 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import UpdatePost from "@/features/posts/updatePost";
-
-import { toast } from "sonner";
-import { PostType } from "@/features/posts/Post.Model";
-import { deletePost } from "@/features/posts/postAPI";
 
 interface Props {
   post: PostType;
-  setPosts?: React.Dispatch<React.SetStateAction<PostType[]>>;
+  setPosts?: React.Dispatch<React.SetStateAction<PostType[]>>
   posts?: PostType[];
 }
 
@@ -84,7 +84,10 @@ export default function Post({ post, posts, setPosts }: Props) {
       <CardFooter className="flex justify-between gap-4">
         <Dialog open={isUpdateDialogOpen} onOpenChange={setIsUpdateDialogOpen}>
           <DialogTrigger asChild>
-            <Button variant={"secondary"} size={"icon"}>
+            <Button variant={"secondary"} 
+              size={"icon"} 
+              data-testid="updateButton" 
+            >
               <Pencil className="h-4 w-4" />
             </Button>
           </DialogTrigger>
@@ -105,7 +108,7 @@ export default function Post({ post, posts, setPosts }: Props) {
         </Dialog>
         <AlertDialog>
           <AlertDialogTrigger asChild>
-            <Button variant={"destructive"} size={"icon"}>
+            <Button variant={"destructive"} size={"icon"} data-testid="deleteButton">
               <Trash className="h-4 w-4" />
             </Button>
           </AlertDialogTrigger>

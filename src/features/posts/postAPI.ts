@@ -3,7 +3,7 @@
 import axios from "axios"
 import { PostType } from "./Post.Model"
 
-const API_URL = 'http://localhost:3000/posts'
+export const API_URL = 'http://localhost:3000/posts'
 
 export const fetchPosts = async () => {
     const response = await axios.get(API_URL)

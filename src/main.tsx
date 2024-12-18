@@ -4,10 +4,23 @@ import "./index.css";
 import App from "./App.tsx";
 import GlobalState from "@/context/GlobalState.tsx";
 
-createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <GlobalState>
-      <App />
-    </GlobalState>
-  </StrictMode>
-);
+
+async function enableMocking() {
+  if (process.env.NODE_ENV !== 'development') {
+    return
+  }
+  const { worker } = await import('./mocks/browser')
+  return worker.start()
+}
+
+ 
+
+enableMocking().then(()=>{
+  createRoot(document.getElementById("root")!).render(
+    <StrictMode>
+      <GlobalState>
+        <App />
+      </GlobalState>
+    </StrictMode>
+  );
+}) 
